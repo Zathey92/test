@@ -9,7 +9,6 @@ use JsonSerializable;
  *
  * @ORM\Entity(repositoryClass="App\Repository\ConfiguracionRedondeosRepository")
  * @ORM\Table(name="CONFIGURACION_REDONDEOS")
- * @ORM\Entity()
  * 
  */
 
@@ -38,7 +37,7 @@ class ConfiguracionRedondeos implements JsonSerializable{
      * @ORM\JoinColumn(name="ID_AMBITOS_STD", referencedColumnName="ID")
      *
      */
-    private $ambitosSTD_ID;
+    private $ambito;
 
     /**
      * @return integer
@@ -83,17 +82,17 @@ class ConfiguracionRedondeos implements JsonSerializable{
     /**
      * @return AmbitoSTD
      */
-    public function getAmbitosSTDID(): AmbitoSTD
+    public function getAmbito(): AmbitoSTD
     {
-        return $this->ambitosSTD_ID;
+        return $this->ambito;
     }
 
     /**
-     * @param AmbitoSTD $ambitosSTD_ID
+     * @param AmbitoSTD $ambito
      */
-    public function setAmbitosSTDID(AmbitoSTD $ambitosSTD_ID): void
+    public function setAmbito(AmbitoSTD $ambito): void
     {
-        $this->ambitosSTD_ID = $ambitosSTD_ID;
+        $this->ambito = $ambito;
     }
 
     /**
@@ -109,7 +108,7 @@ class ConfiguracionRedondeos implements JsonSerializable{
             'id'=>$this->id,
             'valor'=>$this->valor,
             'descripcion'=>$this->descripcion,
-            'ambito'=>$this->ambitosSTD_ID,
+            'ambito'=>$this->ambito,
         );
     }
 }

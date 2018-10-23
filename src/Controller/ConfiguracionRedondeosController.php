@@ -48,30 +48,30 @@ class ConfiguracionRedondeosController extends Controller
     public function update(Request $request)
     {
         $descripcion = $request->request->get('descripcion');
-        $ambitosID = $request->request->get('ambitos_id');
+        $ambitosID = $request->request->get('ambito');
         $valor = $request->request->get('valor');
 
 
         try {
             $em = $this->getDoctrine()->getManager();
-            $configRedondeo = $em->getRepository(ConfiguracionRedondeos::class)->findOneBy(array(
-                'valor'=>$valor,
-                'descripcion'=> $descripcion,
-                'ambitosSTD_ID'=> $ambitosID
-            ));
             $ambito = $em->getRepository(AmbitoSTD::class)->findOneBy(array(
                 'id'=>$ambitosID,
             ));
             if(!isset($ambito)){
                 throw new EntityNotFoundException('No existe ambito con id: '.$ambitosID,404);
             }
+            $configRedondeo = $em->getRepository(ConfiguracionRedondeos::class)->findOneBy(array(
+                'valor'=>$valor,
+                'descripcion'=> $descripcion,
+                'ambito'=> $ambitosID
+            ));
 
             if(!isset( $configRedondeo ) ){
                 $configRedondeo = new ConfiguracionRedondeos();
             }
             $configRedondeo->setValor($valor);
             $configRedondeo->setDescripcion($descripcion);
-            $configRedondeo->setAmbitosSTDID($ambito);
+            $configRedondeo->setAmbito($ambito);
 
 
             $em->persist($configRedondeo);
