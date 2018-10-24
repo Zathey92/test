@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Gio;
 
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 
 /**
  *
- * @ORM\Entity(repositoryClass="App\Repository\ConfiguracionRedondeosRepository")
  * @ORM\Table(name="CONFIGURACION_REDONDEOS")
+ * @ORM\Entity()
  * 
  */
 
@@ -17,7 +17,6 @@ class ConfiguracionRedondeos implements JsonSerializable{
     /**
      * @ORM\Id
      * @ORM\Column(name="ID", type="integer", length=10)
-     * @ORM\GeneratedValue
      */
     private $id;
 
@@ -32,10 +31,7 @@ class ConfiguracionRedondeos implements JsonSerializable{
     private $valor;
 
     /**
-     * @var AmbitoSTD
-     * @ORM\ManyToOne(targetEntity="AmbitoSTD", fetch="EAGER")
-     * @ORM\JoinColumn(name="ID_AMBITOS_STD", referencedColumnName="ID")
-     *
+     * @ORM\Column(name="ID_AMBITOS_STD", type="integer", length=10)
      */
     private $ambito;
 
@@ -80,28 +76,20 @@ class ConfiguracionRedondeos implements JsonSerializable{
     }
 
     /**
-     * @return AmbitoSTD
+     * @return integer
      */
-    public function getAmbito(): AmbitoSTD
+    public function getAmbito()
     {
         return $this->ambito;
     }
 
     /**
-     * @param AmbitoSTD $ambito
+     * @param integer $ambito
      */
-    public function setAmbito(AmbitoSTD $ambito): void
+    public function setAmbito($ambito): void
     {
         $this->ambito = $ambito;
     }
-
-    /**
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     * @since 5.4.0
-     */
     public function jsonSerialize()
     {
         return array(
@@ -111,4 +99,13 @@ class ConfiguracionRedondeos implements JsonSerializable{
             'ambito'=>$this->ambito,
         );
     }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
 }

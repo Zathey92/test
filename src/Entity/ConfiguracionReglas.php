@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Gio;
 
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ConfiguracionReglasRepository")
- * @ORM\Table(name="CONFIGURACION_REGLAS")
+ *
+ * @ORM\Table(name="CONFIGURACION_REDONDEOS")
+ * @ORM\Entity()
  * 
  */
 
-class ConfiguracionReglas  implements JsonSerializable{
+class ConfiguracionReglas implements JsonSerializable{
     
     /**
      * @ORM\Id
      * @ORM\Column(name="ID", type="integer", length=10)
-     * @ORM\GeneratedValue
      */
     private $id;
 
@@ -37,7 +37,7 @@ class ConfiguracionReglas  implements JsonSerializable{
 
     /**
      * @var ConfiguracionRedondeos
-     * @ORM\ManyToOne(targetEntity="App\Entity\ConfiguracionRedondeos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gio\ConfiguracionRedondeos")
      * @ORM\JoinColumn(name="CONFIGURACION_REDONDEOS", referencedColumnName="ID", nullable=true)
      */
     private $redondeo;
@@ -53,9 +53,12 @@ class ConfiguracionReglas  implements JsonSerializable{
     private $eliminada;
 
     /**
-     * @ORM\Column(name="DATCREACION", type="datetime" )
+     * @ORM\Column(name="DATCREACION", type="string" )
      */
     private $datCreacion;
+
+    public function __construct(){
+    }
 
     /**
      * @return integer
@@ -189,5 +192,13 @@ class ConfiguracionReglas  implements JsonSerializable{
             'dat_creacion'=>$this->datCreacion,
             'aplicar_desde'=>$this->aplicarDesde
         );
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 }
