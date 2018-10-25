@@ -1,0 +1,29 @@
+$operacion = '*' 
+$valor = 5
+$toPrice = 'precio_2'
+$fromPrice = 'precio_1'
+$operationString = $fromPrice.' '.$operacion.' '.$valor
+
+$qb = $this->entityManager->createQueryBuilder();
+$qb->update('Doctor\Entity\Articulo', 'articulo')
+   ->set('articulo'.$toPrice, $operationString)
+if($marca){
+   $qb->andwhere('articulo.propiedad1 = :marca')->setParameter('marca', $marca)
+}
+if($tipo){
+   $qb->andwhere('aticulo.codigo_tipo = :tipo')->setParameter('tipo', $tipo)
+}
+if($proveedor){
+	$qb2 = $this->entityManager->createQueryBuilder();
+	$qb->andWhere($qb->expr()->in('articulo.id',
+				$qb2->select('articulo')
+ 	           		->from('Doctor\Entity\ArticuloProveedor', 'proveedor')
+  	          		->where('proveedor.id' = ':proveedor')
+   	         		->setParameter('proveedor', $proveedor)
+ 	                       )
+ 	   );
+}
+    //If organizations is an array of ids => o.id... if is an array of entities your code where rigth here
+   
+                ->andWhere('articulo.marca = :marcaId')
+            	->setParameter('marcaId', $marcaId);
