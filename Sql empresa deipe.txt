@@ -23,7 +23,3 @@ if($proveedor){
  	                       )
  	   );
 }
-    //If organizations is an array of ids => o.id... if is an array of entities your code where rigth here
-   
-                ->andWhere('articulo.marca = :marcaId')
-            	->setParameter('marcaId', $marcaId);
